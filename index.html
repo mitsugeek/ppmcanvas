@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <style type='text/css'>
+    table{
+  border-collapse:collapse;
+  border:none;
+  border-spacing:0;
+}
+th,td{
+  vertical-align:top;
+  border:solid 0px #000;
+  font-weight:normal;
+  text-align:left;
+}
+caption{
+  text-align:left;
+}
+  </style>
+</head>
+<body>
+<div>
+    ＰＰＭ（プロダクト・ポートフォリオ・マネジメント）
+</div>
+<table  style="table-layout: fixed;">
+    <col width="10" />
+    <col width="10" />
+    <col />
+    <col width="40" />
+    <tr>
+        <td style="vertical-align:top;">
+            高
+        </td>
+        <td rowspan="3" colspan="3">
+            <canvas id="c1" width="300" height="202"></canvas>
+        </td>
+    </tr>
+    <tr>
+        <td style="vertical-align:middle;padding-top:20px;">市場成長率</td>
+    </tr>
+    <tr>
+        <td style="vertical-align:bottom;">低</td>
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <td style="text-align:left;">
+            高
+        </td>
+        <td style="text-align:center;">相対的市場占有率</td>
+        <td style="text-align:left;">
+            低
+        </td>
+    </tr>
+</table>
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+<script type='text/javascript'>//<![CDATA[ 
+$(window).load(function(){
+$(document).ready(function(){
+    draw1();
+});
+function draw1() {
+  var canvas = $('#c1')[0];
+  if ( ! canvas || ! canvas.getContext ) { return false; }
+  var ctx = canvas.getContext('2d');
+  ctx.beginPath();
+  ctx.strokeRect(1, 1, 140, 100);
+  ctx.strokeRect(141, 1, 140, 100);
+  ctx.strokeRect(141, 1, 140, 100);
+  ctx.strokeRect(1, 101, 140, 100);
+  ctx.strokeRect(141, 101, 140, 100);
+}
+});//]]>  
+
+</script>
+</body>
+</html>
