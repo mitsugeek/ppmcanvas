@@ -70,6 +70,20 @@ function draw1() {
   ctx.strokeRect(141, 1, 140, 100);
   ctx.strokeRect(1, 101, 140, 100);
   ctx.strokeRect(141, 101, 140, 100);
+
+  $('#c1').click(function(e){
+    console.log("test")
+    var x = y = 0; 
+    var rect = e.target.getBoundingClientRect() ;
+    x = e.clientX - rect.left;
+    y = e.clientY - rect.top;
+
+    ctx.strokeStyle = "rgba(0,0,0,0.7)"; 
+    ctx.beginPath();
+    ctx.arc(x,y,15,0,Math.PI*2, false);
+    ctx.closePath();
+    ctx.stroke();
+  });
 }
 });//]]>  
 
