@@ -23,7 +23,7 @@ caption{
 <div>
     ＰＰＭ（プロダクト・ポートフォリオ・マネジメント）
 </div>
-<table  style="table-layout: fixed;">
+<table  style="table-layout: fixed;" onselectstart="return false;">
     <col width="10" />
     <col width="10" />
     <col />
@@ -54,25 +54,40 @@ caption{
         </td>
     </tr>
 </table>
+<div>製品名:<input type="text" /></div>
+<div>分類:<span id="bunrui"></span></div>
+<div>x:<span id="x"></span></div>
+<div>y:<span id="y"></span></div>
+
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
 <script type='text/javascript'>//<![CDATA[ 
 $(window).load(function(){
 $(document).ready(function(){
     draw1();
 });
-function draw1() {
-  var canvas = $('#c1')[0];
-  if ( ! canvas || ! canvas.getContext ) { return false; }
-  var ctx = canvas.getContext('2d');
-  ctx.beginPath();
-  ctx.strokeRect(1, 1, 140, 100);
-  ctx.strokeRect(141, 1, 140, 100);
-  ctx.strokeRect(141, 1, 140, 100);
-  ctx.strokeRect(1, 101, 140, 100);
-  ctx.strokeRect(141, 101, 140, 100);
 
-  $('#c1').click(function(e){
-    console.log("test")
+function drawCanvas(ctx){
+  return function(e){
+    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fillRect(1, 1, 279, 199);
+    //ctx.clearRect(20, 30, 60, 40);
+
+    ctx.beginPath();
+    ctx.strokeRect(1, 1, 140, 100);
+    ctx.strokeRect(141, 1, 140, 100);
+    ctx.strokeRect(141, 1, 140, 100);
+    ctx.strokeRect(1, 101, 140, 100);
+    ctx.strokeRect(141, 101, 140, 100);
+
+    $("#x").text("");
+    $("#y").text("");
+    $("#bunrui").text();
+
+    $("#c1").one("click",setEvent(ctx));
+  };
+}
+function setEvent(ctx){
+  return function(e){
     var x = y = 0; 
     var rect = e.target.getBoundingClientRect() ;
     x = e.clientX - rect.left;
@@ -81,9 +96,37 @@ function draw1() {
     ctx.strokeStyle = "rgba(0,0,0,0.7)"; 
     ctx.beginPath();
     ctx.arc(x,y,15,0,Math.PI*2, false);
+    ctx.arc(x,y,15,0,Math.PI*2, false);
+    ctx.arc(x,y,15,0,Math.PI*2, false);
     ctx.closePath();
     ctx.stroke();
-  });
+    $("#c1").one("click",drawCanvas(ctx));
+    console.log("x:" + x + ",y:" + y);
+    $("#x").text(x);
+    $("#y").text(y);
+
+    if(0 < x && x < 140){
+      if(0 < y && y < 100){
+        $("#bunrui").text("花形");
+      }else{
+        $("#bunrui").text("金のなる木");
+      }
+    }else{
+      if(0 < y && y < 100){
+        $("#bunrui").text("問題児");
+      }else{
+        $("#bunrui").text("負け犬");
+      }
+    }
+  }
+}
+
+function draw1() {
+  var canvas = $('#c1')[0];
+  if ( ! canvas || ! canvas.getContext ) { return false; }
+  var ctx = canvas.getContext('2d');
+  var func = drawCanvas(ctx);
+  func();
 }
 });//]]>  
 
